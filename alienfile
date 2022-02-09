@@ -1,0 +1,23 @@
+use alienfile;
+
+plugin 'Probe::CommandLine' => (
+  command => 'swig',
+  args    => [ '-version' ],
+  match   => qr/SWIG Version ([0-9\.]+)/,
+  version => qr/SWIG Version ([0-9\.]+)/,
+);
+
+share {
+  start_url 'http://swig.org/download.html';
+  plugin Download => (
+    filter  => qr/^swig.*tar\.gz$/,
+    version => qr/([0-9\.]+)/,
+  );
+  plugin Extract => 'tar.gz';
+  plugin 'Build::Autoconf';
+  build [
+    '%{configure}',
+    '%{make}',
+    '%{make} install',
+  ];
+}
