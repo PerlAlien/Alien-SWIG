@@ -99,6 +99,7 @@ jobs:
             mingw-w64-x86_64-toolchain
             mingw-w64-x86_64-perl
             mingw-w64-x86_64-cmake
+            mingw-w64-x86_64-pcre2
       - name: Set up SWIG (MSYS2/MinGW pacman)
         if: runner.os == 'Windows' && matrix.dist == 'msys2' && matrix.alien-install-type == 'system'
         shell: msys2 {0}
