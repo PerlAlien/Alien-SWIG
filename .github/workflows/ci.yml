@@ -79,6 +79,8 @@ jobs:
         with:
           name: dist
 
+      # Note SWIG is already installed in virtual-environments.
+
       # Setup system SWIG
       - name: Setup system SWIG (apt)
         if: runner.os == 'Linux' && matrix.alien-install-type == 'system'
@@ -133,6 +135,30 @@ jobs:
         run: |
           echo "ALIEN_INSTALL_TYPE=${{ matrix.alien-install-type }}" >> $GITHUB_ENV
 
+      - name: Run tests
+        run: |
+          cpanm --verbose --test-only .
+
+  # Test using container because the container does not have SWIG pre-installed.
+  test-container:
+    needs: dist
+    runs-on: ${{ matrix.os }}
+    container: perl:${{ matrix.perl-version }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        perl-version: ['5.34']
+    steps:
+      - name: Get dist artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: dist
+      - name: Check that there is no SWIG pre-installed
+        run: |
+          [ $( which swig | wc -l ) = "0" ] || exit 1
+      - name: Install Perl deps
+        run: |
+          cpanm --notest --installdeps .
       - name: Run tests
         run: |
           cpanm --verbose --test-only .
