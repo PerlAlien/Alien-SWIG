@@ -9,7 +9,7 @@ use 5.008004;
 
 =head1 NAME
 
-Alien::SWIG - Find or build SWIG
+Alien::SWIG - Find or build SWIG C/C++ interface generator
 
 =head1 SYNOPSIS
 
@@ -32,6 +32,10 @@ for the use of other modules.
 =head1 SEE ALSO
 
 =over 4
+
+=item L<SWIG|http://www.swig.org/>
+
+The SWIG interface generator home page.
 
 =item L<Alien>
 
