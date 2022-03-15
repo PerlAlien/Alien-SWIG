@@ -85,9 +85,7 @@ jobs:
       - name: Setup system SWIG (apt)
         if: runner.os == 'Linux' && matrix.alien-install-type == 'system'
         run: |
-          # Allow failure of apt-get update for now.
-          # See <https://github.com/actions/virtual-environments/issues/5237>.
-          (sudo apt-get -y update || true) && sudo apt-get install -y swig
+          sudo apt-get -y update && sudo apt-get install -y swig
       - name: Setup system SWIG (homebrew)
         if: runner.os == 'macOS' && matrix.alien-install-type == 'system'
         run: |
