@@ -1,15 +1,15 @@
 # NAME
 
-Alien::SWIG - Find or build SWIG C/C++ interface generator
+Alien::SWIG4 - Find or build SWIG C/C++ interface generator
 
 # SYNOPSIS
 
 Command line tool:
 
-    use Alien::SWIG;
+    use Alien::SWIG4;
     use Env qw( @PATH );
 
-    unshift @PATH, Alien::SWIG->bin_dir;
+    unshift @PATH, Alien::SWIG4->bin_dir;
 
 # DESCRIPTION
 

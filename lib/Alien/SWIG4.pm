@@ -1,4 +1,4 @@
-package Alien::SWIG;
+package Alien::SWIG4;
 
 use strict;
 use warnings;

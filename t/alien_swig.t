@@ -1,10 +1,10 @@
 use Test2::V0;
 use Test::Alien;
 use Test::Alien::Diag;
-use Alien::SWIG;
+use Alien::SWIG4;
 
-alien_diag 'Alien::SWIG';
-alien_ok 'Alien::SWIG';
+alien_diag 'Alien::SWIG4';
+alien_ok 'Alien::SWIG4';
 
 run_ok([ qw(swig -version) ])
    ->success

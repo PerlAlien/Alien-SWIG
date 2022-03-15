@@ -14,7 +14,7 @@ share {
 
   plugin Download => (
     filter  => qr/^swig.*tar\.gz$/,
-    version => qr/([0-9\.]+)/,
+    version => qr/4\.([0-9\.]+)/,
   );
 
   plugin Extract => 'tar.gz';
