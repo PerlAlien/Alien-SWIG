@@ -1,6 +1,6 @@
 # NAME
 
-Alien::SWIG4 - Find or build SWIG C/C++ interface generator
+Alien::SWIG4 - Find or build SWIG v4 C/C++ interface generator
 
 # SYNOPSIS
 
