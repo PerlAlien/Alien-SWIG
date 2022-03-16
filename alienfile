@@ -3,8 +3,8 @@ use alienfile;
 plugin 'Probe::CommandLine' => (
   command => 'swig',
   args    => [ '-version' ],
-  match   => qr/SWIG Version ([0-9\.]+)/,
-  version => qr/SWIG Version ([0-9\.]+)/,
+  match   => qr/SWIG Version (4\.[0-9\.]+)/,
+  version => qr/SWIG Version (4\.[0-9\.]+)/,
 );
 
 share {
