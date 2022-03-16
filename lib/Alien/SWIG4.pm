@@ -9,16 +9,16 @@ use 5.008004;
 
 =head1 NAME
 
-Alien::SWIG - Find or build SWIG C/C++ interface generator
+Alien::SWIG4 - Find or build SWIG v4 C/C++ interface generator
 
 =head1 SYNOPSIS
 
 Command line tool:
 
- use Alien::SWIG;
+ use Alien::SWIG4;
  use Env qw( @PATH );
 
- unshift @PATH, Alien::SWIG->bin_dir;
+ unshift @PATH, Alien::SWIG4->bin_dir;
 
 =head1 DESCRIPTION
 
