@@ -6,6 +6,20 @@ on:
       - '*'
   pull_request:
 
+env:
+  # Note SWIG is already installed in virtual-environments.
+  PKG_NAME: SWIG
+  PKG_UBUNTU: swig
+  PKG_HOMEBREW: swig
+  PKG_MSYS2_MINGW64: mingw-w64-x86_64-swig
+  PKG_MSYS2_MINGW64_DEPS: >-
+    base-devel
+    unzip
+    mingw-w64-x86_64-toolchain
+    mingw-w64-x86_64-perl
+    mingw-w64-x86_64-cmake
+    mingw-w64-x86_64-pcre2
+
 jobs:
   dist:
     name: Make distribution using Dist::Zilla
@@ -79,34 +93,26 @@ jobs:
         with:
           name: dist
 
-      # Note SWIG is already installed in virtual-environments.
-
-      # Setup system SWIG
-      - name: Setup system SWIG (apt)
+      # Setup system package
+      - name: Setup system ${{ env.PKG_NAME }} (apt)
         if: runner.os == 'Linux' && matrix.alien-install-type == 'system'
         run: |
-          sudo apt-get -y update && sudo apt-get install -y swig
-      - name: Setup system SWIG (homebrew)
+          sudo apt-get -y update && sudo apt-get install -y ${{ env.PKG_UBUNTU }}
+      - name: Setup system ${{ env.PKG_NAME }} (homebrew)
         if: runner.os == 'macOS' && matrix.alien-install-type == 'system'
         run: |
-          brew install swig
+          brew install ${{ env.PKG_HOMEBREW }}
       - name: Set up MSYS2
         uses: msys2/setup-msys2@v2
         if: runner.os == 'Windows' && matrix.dist == 'msys2'
         with:
           update: true
-          install: >-
-            base-devel
-            unzip
-            mingw-w64-x86_64-toolchain
-            mingw-w64-x86_64-perl
-            mingw-w64-x86_64-cmake
-            mingw-w64-x86_64-pcre2
-      - name: Set up SWIG (MSYS2/MinGW pacman)
+          install: ${{ env.PKG_MSYS2_MINGW64_DEPS }}
+      - name: Set up ${{ env.PKG_NAME }} (MSYS2/MinGW pacman)
         if: runner.os == 'Windows' && matrix.dist == 'msys2' && matrix.alien-install-type == 'system'
         shell: msys2 {0}
         run: |
-          pacman -S --needed --noconfirm mingw-w64-x86_64-swig
+          pacman -S --needed --noconfirm ${{ env.PKG_MSYS2_MINGW64 }}
 
       # Setup Perl
       - name: Set up perl
