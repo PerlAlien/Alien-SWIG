@@ -10,7 +10,7 @@ plugin 'Probe::CommandLine' => (
 share {
   requires 'File::Which';
 
-  start_url 'http://swig.org/download.html';
+  start_url 'https://swig.org/download.html';
 
   plugin Download => (
     filter  => qr/^swig.*tar\.gz$/,
