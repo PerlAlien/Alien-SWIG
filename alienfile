@@ -1,5 +1,7 @@
 use alienfile;
 
+use Env qw(@PATH);
+
 plugin 'Probe::CommandLine' => (
   command => 'swig',
   args    => [ '-version' ],
@@ -12,6 +14,7 @@ plugin 'Build::SearchDep' => (
 );
 
 share {
+  requires 'Alien::PCRE2';
   start_url 'https://swig.org/download.html';
 
   plugin Download => (
@@ -20,6 +23,16 @@ share {
   );
 
   plugin Extract => 'tar.gz';
+
+  meta->around_hook( prefer => sub {
+    my($orig, $build) = @_;
+
+    # path for pcre2-config
+    push @PATH, Alien::PCRE2->bin_dir;
+
+    $orig->($build);
+
+  });
 
   plugin 'Build::Autoconf';
   build [
