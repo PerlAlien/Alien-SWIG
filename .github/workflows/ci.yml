@@ -136,6 +136,10 @@ jobs:
         run: |
           cpanm --notest --installdeps .
 
+      - name: Install Alien::PCRE2 for share install
+        run: |
+          cpanm --notest Alien::PCRE2
+        if: matrix.alien-install-type == 'share'
       - name: Set ALIEN_INSTALL_TYPE
         shell: bash
         run: |
@@ -165,6 +169,9 @@ jobs:
       - name: Install Perl deps
         run: |
           cpanm --notest --installdeps .
+      - name: Install Alien::PCRE2 for share install
+        run: |
+          cpanm --notest Alien::PCRE2
       - name: Run tests
         run: |
           cpanm --verbose --test-only .
